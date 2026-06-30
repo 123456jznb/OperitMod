@@ -46,11 +46,11 @@ android {
         }
     }
 
-    externalNativeBuild {
-        cmake {
-            path = file("src/main/cpp/CMakeLists.txt")
-        }
-    }
+    // externalNativeBuild {
+//         cmake {
+//             path = file("src/main/cpp/CMakeLists.txt")
+//         }
+//     }
 
     defaultConfig {
         applicationId = "com.ai.assistance.operit.mod"
@@ -71,11 +71,11 @@ android {
             abiFilters.addAll(listOf("arm64-v8a"))
         }
 
-        externalNativeBuild {
-            cmake {
-                cppFlags("-std=c++17")
-            }
-        }
+        // externalNativeBuild {
+//             cmake {
+//                 cppFlags("-std=c++17")
+//             }
+//         }
 
         buildConfigField("String", "GITHUB_CLIENT_ID", "\"${localProperties.getProperty("GITHUB_CLIENT_ID")}\"")
         buildConfigField("String", "GITHUB_CLIENT_SECRET", "\"${localProperties.getProperty("GITHUB_CLIENT_SECRET")}\"")
