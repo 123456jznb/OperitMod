@@ -42,3 +42,4 @@ jobs:
         with:
           name: OperitMod
           path: app/build/outputs/apk/debug/*.apk
+
