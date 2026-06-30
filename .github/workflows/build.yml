@@ -22,17 +22,20 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         
-      - name: Build APK (skip native)
+      - name: Disable native builds in all modules
+        run: |
+          for f in app quickjs llama mnn mmd fbx dragonbones; do
+            if [ -f "$f/build.gradle.kts" ]; then
+              sed -i '/externalNativeBuild/,/^    }/s/externalNativeBuild/\/\/externalNativeBuild/g' "$f/build.gradle.kts" 2>/dev/null || true
+              sed -i '/cmake {/,/^        }/s/^        /        \/\//g' "$f/build.gradle.kts" 2>/dev/null || true
+            fi
+          done
+          echo "Native builds disabled"
+          
+      - name: Build APK
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug -x externalNativeBuildDebug \
-            -x :quickjs:externalNativeBuildDebug \
-            -x :llama:externalNativeBuildDebug \
-            -x :mnn:externalNativeBuildDebug \
-            -x :mmd:externalNativeBuildDebug \
-            -x :fbx:externalNativeBuildDebug \
-            -x :dragonbones:externalNativeBuildDebug \
-            --no-daemon
+          ./gradlew assembleDebug --no-daemon
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
