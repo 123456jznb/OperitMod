@@ -1,0 +1,6 @@
+*.apk
+*.zip
+/build/
+app/build/
+.cxx/
+local.properties

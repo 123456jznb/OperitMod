@@ -1,0 +1,41 @@
+name: Build Operit Mod
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+          
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        
+      - name: Build APK (skip native)
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug -x externalNativeBuildDebug \
+            -x :quickjs:externalNativeBuildDebug \
+            -x :llama:externalNativeBuildDebug \
+            -x :mnn:externalNativeBuildDebug \
+            -x :mmd:externalNativeBuildDebug \
+            -x :fbx:externalNativeBuildDebug \
+            -x :dragonbones:externalNativeBuildDebug \
+            --no-daemon
+          
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: OperitMod
+          path: app/build/outputs/apk/debug/*.apk
