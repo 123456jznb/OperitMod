@@ -37,10 +37,11 @@ import com.ai.assistance.operit.terminal.provider.filesystem.LocalFileSystemProv
 import com.ai.assistance.operit.terminal.provider.filesystem.PRootBindMount
 import com.ai.assistance.operit.terminal.provider.filesystem.PRootMountMapping
 import com.ai.assistance.operit.terminal.provider.type.HiddenExecResult
-import com.ai.assistance.operit.terminal.provider.type.TerminalProvider
-import com.ai.assistance.operit.terminal.provider.type.TerminalType
 import com.ai.assistance.operit.terminal.provider.type.LocalTerminalProvider
 import com.ai.assistance.operit.terminal.provider.type.SSHTerminalProvider
+import com.ai.assistance.operit.terminal.provider.type.TerminalProvider
+import com.ai.assistance.operit.terminal.provider.type.TerminalType
+import com.ai.assistance.operit.terminal.provider.type.TermuxTerminalProvider
 import com.ai.assistance.operit.terminal.data.TerminalSessionData
 import com.ai.assistance.operit.terminal.view.domain.ansi.AnsiTerminalEmulator
 

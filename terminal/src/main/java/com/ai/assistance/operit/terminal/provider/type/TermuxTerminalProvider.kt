@@ -111,10 +111,11 @@ class TermuxTerminalProvider(
                     stdin = process.outputStream
                 )
 
-                Log.d(TAG, "Termux 交互式终端会话已启动 (session=$sessionId, pid=${process.pid()})")
+                Log.d(TAG, "Termux 交互式终端会话已启动 (session=$sessionId)")
 
                 // Termux 模式不需要 PTY，用 null 替代
-                Result.success(Pair(session, null))
+                @Suppress("UNCHECKED_CAST")
+                Result.success(Pair(session, null as com.ai.assistance.operit.terminal.Pty?))
             } catch (e: Exception) {
                 Log.e(TAG, "启动 Termux 会话失败", e)
                 Result.failure(e)
